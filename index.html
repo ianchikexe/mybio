@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Ян</title>
+    <style>
+        @import url('https://googleapis.com');
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            color: #fff;
+            font-family: 'Playfair Display', serif;
+            overflow-x: hidden;
+        }
+
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 0;
+        }
+
+        .content {
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        .text-block {
+            max-width: 850px;
+        }
+
+        h1, p {
+            color: #fff;
+            text-shadow: 
+                0 0 10px #fff,
+                0 0 20px #fff,
+                0 0 30px rgba(255,255,255,0.6),
+                0 0 40px rgba(255,255,255,0.4);
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-size: 5rem;
+            margin-bottom: 50px;
+            letter-spacing: 5px;
+            font-weight: 700;
+        }
+
+        p {
+            font-size: 1.5rem;
+            line-height: 1.8;
+            font-weight: 400;
+        }
+
+        .highlight {
+            font-style: italic;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="bg-canvas"></canvas>
+
+    <div class="content">
+        <div class="text-block">
+            <h1>ЯН 17 ЛЕТ</h1>
+            
+            <p>Пишу это просто так, чтобы где-то осталось. Я живу в Беларуси, увлекаюсь компами и машинами. В планах — стать программистом, чтобы просто делать своё дело.</p>
+            
+            <p>Меня многие ненавидят, и это взаимно. Постоянно прилетает какой-то хейт из-за здоровья — люди видят, что есть проблемы, и сразу начинают относиться как к какому-то бракованному. Бесит, что каждый считает своим долгом залезть не в своё дело или посмотреть свысока.</p>
+            
+            <p>Был момент, когда я <span class="highlight">реально решил со всем завязать</span>. Дошёл до точки, когда уже не видел смысла продолжать этот цирк. Меня вытащили в последнюю секунду, когда я уже почти всё. Не скажу, что после этого жизнь стала сказкой, просто я всё ещё тут. Зачем-то.</p>
+            
+            <p>Иногда кажется, что я застрял в каком-то бесконечном сером дне, где ничего не меняется. Но я просто живу, пока получается. Пытаюсь вырулить из всего этого дерьма и стать тем, кем хочу, чтобы вообще ни одна тварь не могла мне указывать, как жить.</p>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function init() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2.5;
+                this.speedY = Math.random() * 0.4 + 0.1; 
+                this.opacity = Math.random() * 0.5;
+            }
+            update() {
+                this.y += this.speedY;
+                if (this.y > canvas.height) {
+                    this.y = -10;
+                    this.x = Math.random() * canvas.width;
+                }
+            }
+            draw() {
+                ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function createParticles() {
+            particles = [];
+            for (let i = 0; i < 120; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animate);
+        }
+
+        window.addEventListener('resize', () => {
+            init();
+            createParticles();
+        });
+
+        init();
+        createParticles();
+        animate();
+    </script>
+</body>
+</html>

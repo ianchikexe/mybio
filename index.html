@@ -2,41 +2,67 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Сайт закрыт</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>17 лет одиночества</title>
     <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            background-color: #000;
+        body {
+            background-color: #0d1117;
+            color: #c9d1d9;
+            font-family: 'Georgia', serif;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
-            color: #444; /* Темно-серый цвет, чтобы не бросалось в глаза */
-            font-family: sans-serif;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
         }
-
-        .status {
-            font-size: 1.2rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
+        .container {
+            max-width: 600px;
+            border-left: 2px solid #30363d;
+            padding-left: 30px;
         }
-
+        h1 {
+            font-weight: normal;
+            font-style: italic;
+            color: #58a6ff;
+            font-size: 1.5rem;
+        }
+        .story-text {
+            line-height: 1.8;
+            font-size: 1.1rem;
+            text-align: justify;
+        }
+        .fade-in {
+            animation: fadeIn 3s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
         .footer {
-            position: absolute;
-            bottom: 20px;
+            margin-top: 40px;
             font-size: 0.8rem;
-            opacity: 0.5;
+            color: #484f58;
         }
     </style>
 </head>
 <body>
 
-    <div class="status">Сайт закрыт</div>
-    
-    <div class="footer">янчик пук</div>
+    <div class="container fade-in">
+        <h1>Семнадцатая весна в пустоте</h1>
+        
+        <div class="story-text">
+            <p>Мне семнадцать. Говорят, это время возможностей, но я чувствую себя так, будто стою на перроне, а мой поезд ушел еще до моего рождения. </p>
+            
+            <p>В зеркале я вижу кого-то чужого. Этот человек ведет себя странно, нелепо шутит, когда хочется молчать, и ломает всё, к чему прикасается. Я называю себя дураком, пряча за этим словом страх, что я просто «неисправен». </p>
+            
+            <p>Город шумит за окном, а внутри — тишина. Я пытаюсь продать свое время, свои мысли, свою искренность, но на этом рынке нет покупателей. Кажется, я просто плохой сценарий в чьей-то очень грустной книге.</p>
+        </div>
+
+        <div class="footer">
+            [ файл не найден / личность не подтверждена ]
+        </div>
+    </div>
 
 </body>
 </html>

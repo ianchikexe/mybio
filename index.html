@@ -3,124 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>STALKER | 17</title>
+    <title>17</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
-            background-color: #050505;
-            color: #20c20e; /* Классический хакерский/сталкеровский зеленый */
-            font-family: 'Courier New', Courier, monospace;
+            background-color: #000000; /* Глубокий черный */
+            color: #555555; /* Тусклый серый текст */
+            font-family: 'serif';
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            overflow: hidden;
+            margin: 0;
+            padding: 30px;
         }
 
-        /* Эффект шума на фоне */
-        body::after {
-            content: "";
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: url('https://transparenttextures.com');
-            opacity: 0.1;
-            pointer-events: none;
-        }
-
-        .container {
-            max-width: 700px;
-            width: 90%;
-            padding: 20px;
-            background: rgba(0, 20, 0, 0.2);
-            border: 1px solid #20c20e;
-            box-shadow: 0 0 20px rgba(32, 194, 14, 0.1);
-            position: relative;
-            z-index: 5;
-        }
-
-        .stalker-header {
-            font-size: 3rem;
-            font-weight: bold;
+        .content {
+            max-width: 500px;
             text-align: center;
-            letter-spacing: 15px;
-            margin-bottom: 40px;
-            color: #20c20e;
-            text-shadow: 0 0 10px #20c20e;
-            text-transform: uppercase;
         }
 
-        .story-text {
-            line-height: 1.6;
+        #text {
+            line-height: 2;
             font-size: 1.2rem;
-            min-height: 200px; /* Чтобы контейнер не прыгал */
-            white-space: pre-wrap; /* Сохраняет переносы строк */
+            font-style: italic;
+            letter-spacing: 1px;
+            white-space: pre-wrap;
         }
 
-        /* Мигающий курсор */
+        /* Эффект затухания для всего контейнера */
+        .fade-in {
+            animation: fadeIn 5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
         .cursor {
             display: inline-block;
-            width: 10px;
-            height: 20px;
-            background: #20c20e;
-            margin-left: 5px;
-            animation: blink 0.8s infinite;
+            width: 6px;
+            height: 1.2rem;
+            background: #333;
+            margin-left: 4px;
+            animation: blink 1.2s infinite;
             vertical-align: middle;
         }
 
-        @keyframes blink {
-            50% { opacity: 0; }
-        }
+        @keyframes blink { 50% { opacity: 0; } }
 
-        .footer {
-            margin-top: 30px;
+        /* Еле заметная точка внизу */
+        .dot {
+            margin-top: 50px;
+            color: #1a1a1a;
             font-size: 0.8rem;
-            text-align: center;
-            opacity: 0.5;
-            border-top: 1px dashed #20c20e;
-            padding-top: 10px;
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <div class="stalker-header">STALKER</div>
-        
-        <div class="story-text" id="typewriter"></div><span class="cursor"></span>
-
-        <div class="footer">
-            [ ZONE_DATA_CORRUPTED ]
-        </div>
+    <div class="content fade-in">
+        <div id="text"></div><span class="cursor"></span>
+        <div class="dot">.</div>
     </div>
 
     <script>
-        const text = `Запись #17.
+        const story = `Мне 17.
         
-В 17 лет я чувствую себя лишним в этой Зоне. Все идут к Выжигателю, а я топчусь на месте. 
+Вокруг все чего-то ждут, а я просто не хочу чувствовать эту пустоту. 
 
-Мои слова — это пустые гильзы. Мои действия — это шаги по минам. Я кажусь себе дураком, но, может, это просто радиация одиночества? 
+Больно, когда люди называют тебя «дауном». Еще больнее, когда ты начинаешь верить им и сам ведешь себя так, будто ты сломан. Я не плохой, я просто не знаю, как починить себя в мире, который только и делает, что осуждает. 
 
-Я бы продал всё своё снаряжение за один честный ответ: "Кто я здесь?". Но торговец молчит, а выброс уже близко...`;
+Я устал казаться странным. Я просто хочу, чтобы меня услышали, а не высмеяли. 
 
-        const displayElement = document.getElementById('typewriter');
-        let i = 0;
+Но в ответ только тишина.`;
 
-        function type() {
-            if (i < text.length) {
-                displayElement.innerHTML += text.charAt(i);
-                i++;
-                // Случайная задержка для эффекта печати
-                setTimeout(type, Math.random() * 50 + 30);
+        const textElement = document.getElementById('text');
+        let index = 0;
+
+        function typeWriter() {
+            if (index < story.length) {
+                textElement.innerHTML += story.charAt(index);
+                index++;
+                // Медленная, "тяжелая" печать
+                setTimeout(typeWriter, 70); 
             }
         }
 
-        // Запуск анимации после загрузки
-        window.onload = type;
+        window.onload = typeWriter;
     </script>
 
 </body>

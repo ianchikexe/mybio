@@ -1,33 +1,28 @@
-Вот обновлённая версия — гораздо грубее, жёстче, без прикрас. Дизайн стал резче, текст — тяжелее и без фильтров. Добавлены индустриальные текстуры, рваные акценты, моноширинный шрифт и более прямой, иногда циничный монолог.
-```html
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>17 // ГРУБО</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>17 — маленький город</title>
     <style>
-        /* ЖЁСТКИЙ, ИНДУСТРИАЛЬНЫЙ СТИЛЬ — БЕЗ ГЛАДКОСТИ */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            user-select: none; /* чуть отчуждённее */
         }
 
         body {
-            background: #030303;
+            background: #030405;
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: 'Courier New', 'Fira Code', 'Lucida Sans Typewriter', monospace;
-            padding: 20px;
+            font-family: 'Segoe UI', 'Roboto Mono', 'Courier New', monospace;
+            padding: 1.5rem;
             position: relative;
-            overflow-x: hidden;
         }
 
-        /* Грубая зернистость, как грязная плёнка */
+        /* Глубокий фон с едва заметными пятнами */
         body::before {
             content: "";
             position: fixed;
@@ -35,275 +30,223 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJmIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iLjUiIG51bU9jdGF2ZXM9IjMiLz48L2ZpbHRlcj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWx0ZXI9InVybCgjZikiIG9wYWNpdHk9IjAuMTUiLz48L3N2Zz4=');
-            background-repeat: repeat;
-            opacity: 0.4;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        /* Рваная тень по краям */
-        body::after {
-            content: "";
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 40%;
-            background: linear-gradient(0deg, #000000 0%, transparent 100%);
+            background-image: radial-gradient(circle at 15% 30%, rgba(40, 35, 45, 0.2) 1px, transparent 1px);
+            background-size: 28px 28px;
             pointer-events: none;
             z-index: 0;
         }
 
-        .rough-box {
-            max-width: 760px;
+        /* Центральная карточка — строгая, с характером */
+        .center-piece {
+            max-width: 780px;
             width: 100%;
-            background: #0a0a0c;
-            border: 2px solid #2d2a2f;
-            box-shadow: 12px 12px 0px rgba(0,0,0,0.6), inset 0 0 20px rgba(0,0,0,0.8);
-            padding: 2rem 1.8rem;
+            background: #0b0b0e;
+            border: 1px solid #28222b;
+            border-radius: 28px;
+            box-shadow: 0 20px 40px -12px rgba(0,0,0,0.8), inset 0 1px 0 rgba(255,255,255,0.02);
+            padding: 2.8rem 2.2rem;
             position: relative;
             z-index: 2;
-            transition: all 0.2s;
-            animation: shakeEntry 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            transition: transform 0.2s ease, box-shadow 0.3s;
+            text-align: center; /* всё по центру */
         }
 
-        /* Эффект "удара" при загрузке */
-        @keyframes shakeEntry {
-            0% { transform: translateX(-8px) translateY(4px); opacity: 0; }
-            40% { transform: translateX(4px) translateY(-2px); }
-            70% { transform: translateX(-2px); }
-            100% { transform: translateX(0); opacity: 1; }
+        /* лёгкая "тяжесть" при наведении */
+        .center-piece:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 28px 44px -14px black;
         }
 
-        /* Жирная, рваная полоса сверху */
-        .scar {
-            width: 100%;
-            height: 4px;
-            background: repeating-linear-gradient(90deg, #5a3e4b, #2b1f26 10px, #1a1015 20px);
-            margin-bottom: 25px;
-            box-shadow: 0 2px 6px black;
+        /* область текста */
+        .text-area {
+            text-align: left; /* сам текст выровнен влево для читаемости, но блок центрирован */
+            margin: 0 auto;
+            max-width: 90%;
         }
 
-        .textzone {
-            margin-bottom: 30px;
-        }
-
-        #roughText {
-            font-size: 1.2rem;
-            line-height: 1.6;
-            font-weight: 500;
-            color: #bbadaa;
-            text-shadow: 2px 2px 0px #000000;
+        #dynamic-text {
+            font-size: 1.22rem;
+            line-height: 1.7;
+            font-weight: 450;
+            color: #e0d6db;
+            font-family: 'Courier New', 'Fira Code', monospace;
+            letter-spacing: 0.01em;
             white-space: pre-wrap;
             word-break: break-word;
-            font-family: 'Courier New', monospace;
-            letter-spacing: -0.2px;
+            text-shadow: 0 1px 1px rgba(0,0,0,0.5);
         }
 
-        /* Иногда красно-чёрные вкрапления */
-        .bloody-ink {
-            position: absolute;
-            bottom: 15px;
-            right: 20px;
-            color: #4a1f2a;
-            font-size: 14px;
-            font-weight: bold;
-            transform: rotate(-2deg);
-            opacity: 0.55;
-            font-family: monospace;
+        /* Полоска-разделитель грубая */
+        .scar-divider {
+            width: 70px;
+            height: 2px;
+            background: #4f3943;
+            margin: 24px auto 18px auto;
+            border-radius: 2px;
         }
 
-        /* Курсор – грубая мигалка, угловатая */
-        .fat-cursor {
+        /* курсор печатной машинки */
+        .cursor-block {
             display: inline-block;
-            width: 10px;
+            width: 8px;
             height: 1.5rem;
-            background: #9c8585;
-            margin-left: 2px;
-            animation: brutalBlink 0.9s step-end infinite;
+            background: #b38797;
+            margin-left: 3px;
+            animation: harshBlink 0.9s step-end infinite;
             vertical-align: middle;
-            box-shadow: 0 0 0px 2px #3c2a2a;
+            box-shadow: 0 0 2px #d69db3;
         }
 
-        @keyframes brutalBlink {
-            0%, 100% { background: #b07c7c; opacity: 1; }
-            50% { background: #2c1a1a; opacity: 0.3; }
+        @keyframes harshBlink {
+            0%, 100% { background: #b38797; opacity: 1; }
+            50% { background: #2a1e23; opacity: 0.4; }
         }
 
-        /* Цитата внизу – будто вырезана ножом */
-        .gritty-footer {
+        /* дополнительная цитата / подпись */
+        .silent-signature {
             margin-top: 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            border-top: 1px solid #301f24;
-            padding-top: 1rem;
-            font-size: 0.75rem;
-            color: #53454b;
-            letter-spacing: -0.3px;
+            font-size: 0.8rem;
+            color: #635a63;
             font-family: monospace;
-        }
-
-        .stamp {
-            border: 1px solid #5a414a;
-            padding: 3px 8px;
-            font-weight: bold;
-            background: #110b0d;
-            transform: rotate(-1deg);
-        }
-
-        /* Доп. жёсткий блок, появляется после текста */
-        .afterword-rough {
-            margin-top: 1.8rem;
-            padding: 0.8rem;
-            background: #070507;
-            border-left: 6px solid #672e3e;
-            color: #947d86;
-            font-size: 0.85rem;
-            line-height: 1.5;
-            font-family: monospace;
-            text-transform: uppercase;
             letter-spacing: 1px;
-            opacity: 0;
-            transition: opacity 0.7s ease;
-        }
-
-        .afterword-rough.visible {
-            opacity: 1;
-        }
-
-        a, .no-click {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        /* подпись с молнией */
-        .lightning {
+            border-top: 1px dashed #2e262b;
+            padding-top: 1.2rem;
             display: inline-block;
-            font-size: 16px;
-            filter: drop-shadow(0 0 2px #621e2e);
+            width: auto;
+            transition: opacity 0.8s;
+            opacity: 0;
         }
 
-        @media (max-width: 600px) {
-            .rough-box {
-                padding: 1.2rem;
+        .silent-signature.reveal {
+            opacity: 0.7;
+        }
+
+        /* небольшой грязный эффект */
+        .grain {
+            position: absolute;
+            bottom: 12px;
+            left: 20px;
+            font-size: 11px;
+            color: #2e2429;
+            user-select: none;
+            font-weight: bold;
+        }
+
+        @media (max-width: 550px) {
+            .center-piece {
+                padding: 1.6rem;
             }
-            #roughText {
+            #dynamic-text {
                 font-size: 1rem;
-                line-height: 1.5;
+                line-height: 1.55;
             }
-            .fat-cursor {
+            .cursor-block {
                 height: 1.2rem;
             }
+        }
+
+        /* Эффект "рваной" кромки */
+        .center-piece::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(145deg, rgba(90,70,80,0.2) 0%, transparent 80%);
+            border-radius: 30px;
+            pointer-events: none;
+            z-index: -1;
         }
     </style>
 </head>
 <body>
 
-<div class="rough-box">
-    <div class="scar"></div>
-
-    <div class="textzone">
-        <span id="roughText"></span><span class="fat-cursor" id="cursorBlunt"></span>
+<div class="center-piece">
+    <div class="text-area">
+        <div id="dynamic-text"></div><span class="cursor-block" id="typeCursor"></span>
     </div>
-
-    <div class="afterword-rough" id="bitterEnding">
-        ⚡ тишина не лечит. но хотя бы не врет. ⚡
+    <div class="scar-divider"></div>
+    <div class="silent-signature" id="signatureLine">
+        // никто не услышит, но я всё равно здесь
     </div>
-
-    <div class="gritty-footer">
-        <span class="stamp">[ 17 / НЕ ИСПРАВЛЕН ]</span>
-        <span class="lightning">✕ ✕ ✕</span>
-    </div>
-    <div class="bloody-ink">// заеб*сь?</div>
+    <div class="grain">[ 17° ]</div>
 </div>
 
 <script>
-    // ГРУБЫЙ ТЕКСТ – без сглаживания, прямая боль, без поэзии, с матом и цинизмом
-    const brutalRaw = `мне 17.
+    // НОВЫЙ ТЕКСТ — начало строго "Мне 17 лет. Живу в маленьком городе..." 
+    // дальше по моему вкусу: искренне, грубовато, с надрывом, но без пошлости.
+    const storyStart = `Мне 17 лет. Живу в маленьком городе.
 
-все вокруг чего-то ждут. а я просто хочу, чтобы эта хуйня перестала давить. 
-обзывают "дауном". сначала бесит. потом сам начинаешь в это верить, и ведёшь себя как кусок дерьма.
+Здесь все друг друга знают. И каждый считает своим долгом сказать, какой ты странный. Какой "не такой". Тебя называют дауном, шизом, просто потому что ты молчишь и не лезешь в их тусовки. 
 
-я не плохой? да похуй, плохой или нет. я просто устал притворяться, что меня не ебёт этот пиздец.
+Я не дурак. Я просто устал притворяться, что мне не всё равно.
 
-мир только и делает, что осуждает. каждый считает своим долгом ткнуть пальцем. 
-хотите услышать правду? я сломан. но чинить меня никто не собирается.
+Город маленький — надежд ещё меньше. После школы идёшь по серым панелькам, смотришь на заборы и понимаешь: отсюда не выбраться. По крайней мере — пока. Все ждут какого-то чуда. А я жду, когда перестанет болеть внутри.
 
-я хочу, чтобы меня услышали, а не высмеяли. но в ответ — пиздец какая тишина.
+Самое больное — когда начинаешь верить этим словам. "Даун". "Тормоз". Со временем они въедаются в голову, и ты сам ведёшь себя как сломанная кукла. 
 
-может, это я гнилой. а может, это всё вокруг — мусорная яма. 
-но одно я знаю точно: 17 — это не романтика. это когда внутри пусто, а снаружи все делают вид, что ты обязан улыбаться.
+Я хочу, чтобы меня просто услышали. Без издёвок. Без жалости. Но в ответ — стена. Тишина. Иногда мне кажется, что в этом городе у всех вместо сердец — куски асфальта.
 
-пошли вы. просто пошли.`;
+Но знаешь что? Я ещё здесь. И это, блять, уже победа. 
 
-    // Добавим ещё немного грязи в конце
-    const moreRough = `\n\nзнаешь что? я ещё здесь. и это уже нихуёво так.`;
+Пусть никто не поймёт. Пусть останусь чужим. Но я не сдохну от того, что они обо мне думают.
 
-    const finalText = brutalRaw + moreRough;
+Мне 17. Маленький город. Большая злость. И капля надежды, которую никто не украдёт.`;
 
-    const textContainer = document.getElementById('roughText');
-    const cursorEl = document.getElementById('cursorBlunt');
-    const bitterBlock = document.getElementById('bitterEnding');
+    const textElement = document.getElementById('dynamic-text');
+    const cursor = document.getElementById('typeCursor');
+    const signature = document.getElementById('signatureLine');
 
-    let idx = 0;
-    let finished = false;
+    let i = 0;
+    let isComplete = false;
 
-    function typeRough() {
-        if (idx < finalText.length) {
-            // Жёсткая печать без задержек на переносы — просто сыро
-            textContainer.innerHTML += finalText.charAt(idx);
-            idx++;
-            // Скорость чуть быстрее, но с ощущением "долбления"
-            setTimeout(typeRough, 38);
+    function typeSentence() {
+        if (i < storyStart.length) {
+            textElement.innerHTML += storyStart.charAt(i);
+            i++;
+            setTimeout(typeSentence, 45); // комфортная скорость чтения
         } else {
-            finished = true;
-            // Убиваем курсор резко
-            if (cursorEl) {
-                cursorEl.style.opacity = '0';
-                cursorEl.style.transition = 'opacity 0.2s';
+            // печать закончена
+            isComplete = true;
+            if (cursor) {
+                cursor.style.opacity = '0';
+                cursor.style.transition = 'opacity 0.4s';
             }
-            // Показываем жёсткий эпилог
+            // плавно показываем подпись внизу
             setTimeout(() => {
-                bitterBlock.classList.add('visible');
-            }, 300);
+                signature.classList.add('reveal');
+            }, 500);
         }
     }
 
-    // Стартуем с короткой паузы, как будто кто-то начинает говорить сквозь зубы
+    // Задержка для атмосферы
     setTimeout(() => {
-        typeRough();
-    }, 180);
+        typeSentence();
+    }, 200);
 
-    // Добавляем «эффект удара» при клике (ничего не меняет, но даёт ощущение грубости)
-    const box = document.querySelector('.rough-box');
-    box.addEventListener('click', (e) => {
-        const slash = document.createElement('div');
-        slash.innerText = '/';
-        slash.style.position = 'absolute';
-        slash.style.fontSize = '40px';
-        slash.style.fontWeight = 'bold';
-        slash.style.color = '#742238';
-        slash.style.left = (e.clientX - box.getBoundingClientRect().left) + 'px';
-        slash.style.top = (e.clientY - box.getBoundingClientRect().top) + 'px';
-        slash.style.pointerEvents = 'none';
-        slash.style.opacity = '0.6';
-        slash.style.fontFamily = 'monospace';
-        slash.style.transform = 'rotate(15deg)';
-        slash.style.transition = 'all 0.5s ease-out';
-        box.style.position = 'relative';
-        box.appendChild(slash);
+    // Ненавязчивый клик-эффект (лёгкая рябь)
+    const card = document.querySelector('.center-piece');
+    card.addEventListener('click', (e) => {
+        const ripple = document.createElement('span');
+        ripple.style.position = 'absolute';
+        ripple.style.borderRadius = '50%';
+        ripple.style.backgroundColor = 'rgba(150, 110, 130, 0.15)';
+        ripple.style.width = '30px';
+        ripple.style.height = '30px';
+        ripple.style.left = `${e.clientX - card.getBoundingClientRect().left}px`;
+        ripple.style.top = `${e.clientY - card.getBoundingClientRect().top}px`;
+        ripple.style.transform = 'scale(0)';
+        ripple.style.transition = 'transform 0.5s ease-out, opacity 0.6s';
+        ripple.style.pointerEvents = 'none';
+        card.style.overflow = 'hidden';
+        card.appendChild(ripple);
         setTimeout(() => {
-            slash.style.opacity = '0';
-            slash.style.transform = 'rotate(30deg) translateY(-20px)';
-        }, 40);
-        setTimeout(() => slash.remove(), 500);
+            ripple.style.transform = 'scale(8)';
+            ripple.style.opacity = '0';
+        }, 10);
+        setTimeout(() => ripple.remove(), 500);
     });
-
-    // Контекстное меню отключаем для атмосферы "никаких правил"
-    document.addEventListener('contextmenu', (e) => e.preventDefault());
 </script>
 </body>
 </html>
-```

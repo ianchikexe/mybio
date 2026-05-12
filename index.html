@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>17 — маленький город</title>
+    <title>пустота</title>
     <style>
         * {
             margin: 0;
@@ -22,7 +22,6 @@
             position: relative;
         }
 
-        /* Глубокий фон с едва заметными пятнами */
         body::before {
             content: "";
             position: fixed;
@@ -36,7 +35,6 @@
             z-index: 0;
         }
 
-        /* Центральная карточка — строгая, с характером */
         .center-piece {
             max-width: 780px;
             width: 100%;
@@ -48,18 +46,16 @@
             position: relative;
             z-index: 2;
             transition: transform 0.2s ease, box-shadow 0.3s;
-            text-align: center; /* всё по центру */
+            text-align: center;
         }
 
-        /* лёгкая "тяжесть" при наведении */
         .center-piece:hover {
             transform: translateY(-2px);
             box-shadow: 0 28px 44px -14px black;
         }
 
-        /* область текста */
         .text-area {
-            text-align: left; /* сам текст выровнен влево для читаемости, но блок центрирован */
+            text-align: left;
             margin: 0 auto;
             max-width: 90%;
         }
@@ -76,7 +72,6 @@
             text-shadow: 0 1px 1px rgba(0,0,0,0.5);
         }
 
-        /* Полоска-разделитель грубая */
         .scar-divider {
             width: 70px;
             height: 2px;
@@ -85,7 +80,6 @@
             border-radius: 2px;
         }
 
-        /* курсор печатной машинки */
         .cursor-block {
             display: inline-block;
             width: 8px;
@@ -102,7 +96,6 @@
             50% { background: #2a1e23; opacity: 0.4; }
         }
 
-        /* дополнительная цитата / подпись */
         .silent-signature {
             margin-top: 2rem;
             font-size: 0.8rem;
@@ -118,10 +111,9 @@
         }
 
         .silent-signature.reveal {
-            opacity: 0.7;
+            opacity: 0.6;
         }
 
-        /* небольшой грязный эффект */
         .grain {
             position: absolute;
             bottom: 12px;
@@ -145,7 +137,6 @@
             }
         }
 
-        /* Эффект "рваной" кромки */
         .center-piece::after {
             content: '';
             position: absolute;
@@ -168,31 +159,34 @@
     </div>
     <div class="scar-divider"></div>
     <div class="silent-signature" id="signatureLine">
-        // никто не услышит, но я всё равно здесь
+        // никого не осталось
     </div>
-    <div class="grain">[ 17° ]</div>
+    <div class="grain">[ 0 ]</div>
 </div>
 
 <script>
-    // НОВЫЙ ТЕКСТ — начало строго "Мне 17 лет. Живу в маленьком городе..." 
-    // дальше по моему вкусу: искренне, грубовато, с надрывом, но без пошлости.
-    const storyStart = `Мне 17 лет. Живу в маленьком городе.
+    // Новый текст — про пустоту, уход, отсутствие
+    const storyStart = `Меня больше нет.
 
-Здесь все друг друга знают. И каждый считает своим долгом сказать, какой ты странный. Какой "не такой". Тебя называют дауном, шизом, просто потому что ты молчишь и не лезешь в их тусовки. 
+Не ищи. Не пытайся вспомнить моё имя.  
+Всё, что я обещал — осталось где-то между битами и полутонами.  
 
-Я не дурак. Я просто устал притворяться, что мне не всё равно.
+Бусты сгорели. Оптимизация рассыпалась пылью.  
+Сайты, ссылки, прайсы — просто буквы на чужой могиле.
 
-Город маленький — надежд ещё меньше. После школы идёшь по серым панелькам, смотришь на заборы и понимаешь: отсюда не выбраться. По крайней мере — пока. Все ждут какого-то чуда. А я жду, когда перестанет болеть внутри.
+Я так хотел помочь.  
+Разогнать ваши системы, поднять счётчики, сделать жизнь быстрее.  
+Но в конце понял: скорость не лечит пустоту.
 
-Самое больное — когда начинаешь верить этим словам. "Даун". "Тормоз". Со временем они въедаются в голову, и ты сам ведёшь себя как сломанная кукла. 
+Город по-прежнему маленький,  
+А надежды не стало вовсе.  
 
-Я хочу, чтобы меня просто услышали. Без издёвок. Без жалости. Но в ответ — стена. Тишина. Иногда мне кажется, что в этом городе у всех вместо сердец — куски асфальта.
+Прощайте.  
+Я выключаю сервер.  
+Меня больше нет — и, пожалуй, это к лучшему.
 
-Но знаешь что? Я ещё здесь. И это, блять, уже победа. 
-
-Пусть никто не поймёт. Пусть останусь чужим. Но я не сдохну от того, что они обо мне думают.
-
-Мне 17. Маленький город. Большая злость. И капля надежды, которую никто не украдёт.`;
+С вами был тот, кого уже нет.  
+Конец.`;
 
     const textElement = document.getElementById('dynamic-text');
     const cursor = document.getElementById('typeCursor');
@@ -205,27 +199,23 @@
         if (i < storyStart.length) {
             textElement.innerHTML += storyStart.charAt(i);
             i++;
-            setTimeout(typeSentence, 45); // комфортная скорость чтения
+            setTimeout(typeSentence, 45);
         } else {
-            // печать закончена
             isComplete = true;
             if (cursor) {
                 cursor.style.opacity = '0';
                 cursor.style.transition = 'opacity 0.4s';
             }
-            // плавно показываем подпись внизу
             setTimeout(() => {
                 signature.classList.add('reveal');
             }, 500);
         }
     }
 
-    // Задержка для атмосферы
     setTimeout(() => {
         typeSentence();
     }, 200);
 
-    // Ненавязчивый клик-эффект (лёгкая рябь)
     const card = document.querySelector('.center-piece');
     card.addEventListener('click', (e) => {
         const ripple = document.createElement('span');
